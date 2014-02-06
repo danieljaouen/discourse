@@ -24,9 +24,6 @@ public/plugins/*
 /public/assets/*
 /bundle/*
 
-config/discourse.pill
-config/discourse.conf
-
 # Ignore the default SQLite database and db dumps
 /db/*.sqlite3
 /dbs/*.sql
