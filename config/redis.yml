@@ -4,6 +4,9 @@ defaults: &defaults
   password: <%= GlobalSetting.redis_password %>
   db: <%= GlobalSetting.redis_db %>
 
+local:
+  <<: *defaults
+
 development:
   <<: *defaults
 
