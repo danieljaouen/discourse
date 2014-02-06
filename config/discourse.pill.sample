@@ -1,9 +1,9 @@
 rails_env   = ENV['RAILS_ENV']  || "production"
-rails_root  = ENV['RAILS_ROOT'] || "/var/rails/my_discourse"
+rails_root  = ENV['RAILS_ROOT'] || "/var/www/site/current"
 
-user = ENV["DISCOURSE_USER"] || ENV['USER'] || 'user_running_app'
+user = ENV["DISCOURSE_USER"] || ENV['USER'] || 'deploy'
 group = ENV["DISCOURSE_GROUP"] || ENV['GROUP'] || 'www-data'
-num_webs = ENV["NUM_WEBS"].to_i > 0 ? ENV["NUM_WEBS"].to_i : 4
+num_webs = ENV["NUM_WEBS"].to_i > 0 ? ENV["NUM_WEBS"].to_i : 2
 
 # to debug use
 #Bluepill.application("your_app", :foreground => true) do |app|
