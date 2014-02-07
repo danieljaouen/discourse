@@ -27,7 +27,7 @@ Bluepill.application("discourse", :base_dir => ENV["HOME"] + '/.bluepill') do |a
   end
   # XXX if none match, bootup_bundle is set to the array
 
-  if bootup_bundle
+  unless bootup_bundle.is_a?(Array)
     app.environment = `env -i BUNDLE_GEMFILE=#{rails_root}/Gemfile #{bootup_bundle} exec env`.lines.inject({}) do |env_hash,l|
       kv = l.chomp.split('=',2)
       env_hash[kv[0]] = kv[1]
@@ -72,14 +72,14 @@ Bluepill.application("discourse", :base_dir => ENV["HOME"] + '/.bluepill') do |a
       process.start_grace_time = 30.seconds
       process.stop_grace_time = 30.seconds
       process.restart_grace_time = 10.seconds
-      
+
       process.group = "thins"
       process.uid = user
       process.gid = group
-      
+
       process.daemonize = false
       process.stdout = process.stderr = "#{rails_root}/log/thin-#{i}.log"
-      
+
       # Thanks to: http://www.garrensmith.com/2012/09/24/Staying-up-with-Unicorn-Upstart-Bluepill.html
       # If the amount of memory is exceeded 3 times out of 5, restart
       process.checks :mem_usage, :every => 1.minutes, :below => 750.megabytes, :times => [3, 5]
@@ -93,7 +93,7 @@ Bluepill.application("discourse", :base_dir => ENV["HOME"] + '/.bluepill') do |a
   #    # Puma's Setting file is located in config/puma.rb, if you want to edit them, go to puma.rb.
   #    # the upstream section in the nginx config to match.
   #    # The nginx.sample.conf file assumes you're using sockets.
-  #    
+  #
   #  process.pid_file = "#{rails_root}/tmp/pids/puma.pid"
   #  process.start_grace_time = 30.seconds
   #  process.stop_grace_time = 10.seconds
