@@ -202,6 +202,7 @@ gem 'rack-cors', require: false
 gem 'unicorn', require: false
 gem 'puma', require: false
 gem 'rbtrace', require: false, platform: :mri
+gem 'bluepill'
 
 # required for feed importing and embedding
 gem 'ruby-readability', require: false
